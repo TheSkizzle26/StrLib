@@ -15,5 +15,11 @@ int main(void) {
     const size_t index = Str_index(msg, Str_new("l"));
     printf("l first index: %zu\n", index);
 
+    printf("numeric: %u\n", Str_isNumeric(msg));
+    printf("alpha: %u\n", Str_isAlpha(msg));
+    printf("alnum: %u\n", Str_isAlNum(msg));
+    printf("lower: %u\n", Str_isLower(msg));
+    printf("upper: %u\n", Str_isUpper(msg));
+
     return 0;
 }

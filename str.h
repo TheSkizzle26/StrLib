@@ -1,6 +1,7 @@
 #ifndef STR_H
 #define STR_H
 
+#include <stdbool.h>
 #include <stddef.h>
 
 typedef struct {
@@ -12,6 +13,11 @@ Str Str_new(char* cStr);
 Str Str_slice(Str str, size_t start, size_t end);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
+bool Str_isNumeric(Str str);
+bool Str_isAlpha(Str str);
+bool Str_isAlNum(Str str);
+bool Str_isLower(Str str);
+bool Str_isUpper(Str str);
 void Str_print(Str str);
 void Str_println(Str str);
 
@@ -19,6 +25,8 @@ void Str_println(Str str);
 
 #ifdef STR_IMPLEMENTATION
 
+#include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 
 Str Str_new(char* cStr) {
@@ -81,6 +89,56 @@ size_t Str_index(const Str str, const Str substring) {
     }
 
     return -1;
+}
+
+bool Str_isNumeric(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if ('0' > cur || cur > '9')
+            return false;
+    }
+
+    return true;
+}
+
+bool Str_isAlpha(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if (('a' > cur || cur > 'z') && ('A' > cur || cur > 'Z'))
+            return false;
+    }
+
+    return true;
+}
+
+bool Str_isAlNum(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if (('a' > cur || cur > 'z') && ('A' > cur || cur > 'Z') && ('0' > cur || cur > '9'))
+            return false;
+    }
+
+    return true;
+}
+
+bool Str_isLower(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if ('A' <= cur && cur <= 'Z')
+            return false;
+    }
+
+    return true;
+}
+
+bool Str_isUpper(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if ('a' <= cur && cur <= 'z')
+            return false;
+    }
+
+    return true;
 }
 
 void Str_print(const Str str) {
