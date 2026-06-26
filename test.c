@@ -12,5 +12,8 @@ int main(void) {
     const size_t count = Str_count(msg, Str_new("l"));
     printf("l count: %zu\n", count);
 
+    const size_t index = Str_index(msg, Str_new("l"));
+    printf("l first index: %zu\n", index);
+
     return 0;
 }

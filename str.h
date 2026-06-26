@@ -11,6 +11,7 @@ typedef struct {
 Str Str_new(char* cStr);
 Str Str_slice(Str str, size_t start, size_t end);
 size_t Str_count(Str str, Str sep);
+size_t Str_index(Str str, Str substring);
 void Str_print(Str str);
 void Str_println(Str str);
 
@@ -40,9 +41,6 @@ Str Str_slice(const Str str, const size_t start, size_t end) {
 }
 
 size_t Str_count(const Str str, const Str sep) {
-    if (sep.length > str.length)
-        return 0;
-
     size_t count = 0;
     size_t sepIdx = 0;
 
@@ -65,8 +63,24 @@ size_t Str_count(const Str str, const Str sep) {
     return count;
 }
 
-size_t Str_index(Str str, Str seperator) {
+size_t Str_index(const Str str, const Str substring) {
+    size_t sepIdx = 0;
 
+    for (size_t i = 0; i < str.length; i++) {
+        const char strChar = str.data[i];
+        const char sepChar = substring.data[sepIdx];
+
+        if (strChar == sepChar) {
+            sepIdx++;
+
+            if (sepIdx == substring.length)
+                return i - substring.length + 1;
+        } else {
+            sepIdx = 0;
+        }
+    }
+
+    return -1;
 }
 
 void Str_print(const Str str) {
