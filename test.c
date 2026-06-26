@@ -21,5 +21,8 @@ int main(void) {
     printf("lower: %u\n", Str_isLower(msg));
     printf("upper: %u\n", Str_isUpper(msg));
 
+    printf("starts with Hello: %u\n", Str_startsWith(msg, Str_new("Hello")));
+    printf("ends with world!: %u\n", Str_endsWith(msg, Str_new("world!")));
+
     return 0;
 }

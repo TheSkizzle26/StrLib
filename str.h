@@ -13,6 +13,8 @@ Str Str_new(char* cStr);
 Str Str_slice(Str str, size_t start, size_t end);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
+bool Str_startsWith(Str str, Str prefix);
+bool Str_endsWith(Str str, Str suffix);
 bool Str_isNumeric(Str str);
 bool Str_isAlpha(Str str);
 bool Str_isAlNum(Str str);
@@ -89,6 +91,38 @@ size_t Str_index(const Str str, const Str substring) {
     }
 
     return -1;
+}
+
+bool Str_startsWith(const Str str, const Str prefix) {
+    if (prefix.length > str.length)
+        return false;
+
+    for (size_t i = 0; i < str.length; i++) {
+        if (str.data[i] == prefix.data[i]) {
+            if (i+1 == prefix.length)
+                return true;
+        } else {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool Str_endsWith(const Str str, const Str suffix) {
+    if (suffix.length > str.length)
+        return false;
+
+    for (size_t i = 0; i < str.length; i++) {
+        if (str.data[str.length - i-1] == suffix.data[suffix.length - i-1]) {
+            if (i+1 == suffix.length)
+                return true;
+        } else {
+            return false;
+        }
+    }
+
+    return false;
 }
 
 bool Str_isNumeric(const Str str) {
