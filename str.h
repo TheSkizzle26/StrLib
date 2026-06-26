@@ -28,6 +28,15 @@ Str Str_new(char* cStr) {
     };
 }
 
+Str Str_slice(const Str str, const size_t start, size_t end) {
+    if (end > str.length) end = str.length;
+
+    return (Str) {
+        .data = str.data + start,
+        .length = start < end ? end - start : 0
+    };
+}
+
 void Str_print(const Str str) {
     for (size_t i = 0; i < str.length; i++)
         putchar(str.data[i]);

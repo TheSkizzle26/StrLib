@@ -4,9 +4,10 @@
 
 
 int main(void) {
-    const Str message = Str_new("Hi!");
-    printf("length: %zu\n", message.length);
-    Str_println(message);
+    const Str msg = Str_new("Hello, world!");
+    printf("length: %zu\n", msg.length);
+    Str_println(msg);
+    Str_println(Str_slice(msg, 7, msg.length));
 
     return 0;
 }
