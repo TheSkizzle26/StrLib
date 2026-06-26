@@ -9,6 +9,7 @@ typedef struct {
 } Str;
 
 Str Str_new(char* cStr);
+Str Str_slice(Str str, size_t start, size_t end);
 void Str_print(Str str);
 void Str_println(Str str);
 
