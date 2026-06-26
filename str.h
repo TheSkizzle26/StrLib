@@ -20,7 +20,7 @@ void Str_println(Str str);
 
 Str Str_new(char* cStr) {
     char* start = cStr;
-    while (*cStr) { cStr++; }
+    while (*cStr) cStr++;
 
     return (Str) {
         .data = start,
@@ -36,6 +36,7 @@ void Str_print(const Str str) {
 void Str_println(const Str str) {
     for (size_t i = 0; i < str.length; i++)
         putchar(str.data[i]);
+
     putchar('\n');
 }
 
