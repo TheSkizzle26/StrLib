@@ -9,5 +9,8 @@ int main(void) {
     Str_println(msg);
     Str_println(Str_slice(msg, 7, msg.length));
 
+    const size_t count = Str_count(msg, Str_new("l"));
+    printf("l count: %zu\n", count);
+
     return 0;
 }
