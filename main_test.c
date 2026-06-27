@@ -1,6 +1,7 @@
 #define STR_IMPLEMENTATION
 #include "str.h"
 #include <stdio.h>
+#include <stddef.h>
 
 
 int main(void) {
