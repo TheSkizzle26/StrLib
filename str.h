@@ -1,3 +1,14 @@
+/*
+ * Things to add:
+ *  - Str_split(...)
+ *  - Str_join(...)
+ *  - Str_lower(...)
+ *  - Str_upper(...)
+ *  - Str_removePrefix(...)
+ *  - Str_removeSuffix(...)
+ *  - Str_replace(...)
+ */
+
 #ifndef STR_H
 #define STR_H
 
@@ -13,6 +24,7 @@ Str Str_new(char* cStr);
 Str Str_slice(Str str, size_t start, size_t end);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
+bool Str_equal(Str a, Str b);
 bool Str_startsWith(Str str, Str prefix);
 bool Str_endsWith(Str str, Str suffix);
 bool Str_isNumeric(Str str);
@@ -44,6 +56,7 @@ Str Str_new(char* cStr) {
 Str Str_slice(const Str str, const size_t start, size_t end) {
     if (end > str.length) end = str.length;
 
+    // TODO: check if this is safe for later modifications
     return (Str) {
         .data = str.data + start,
         .length = start < end ? end - start : 0
@@ -93,20 +106,28 @@ size_t Str_index(const Str str, const Str substring) {
     return -1;
 }
 
+bool Str_equal(const Str a, const Str b) {
+    if (a.length != b.length)
+        return false;
+
+    for (size_t i = 0; i < a.length; i++) {
+        if (a.data[i] != b.data[i])
+            return false;
+    }
+
+    return true;
+}
+
 bool Str_startsWith(const Str str, const Str prefix) {
     if (prefix.length > str.length)
         return false;
 
-    for (size_t i = 0; i < str.length; i++) {
-        if (str.data[i] == prefix.data[i]) {
-            if (i+1 == prefix.length)
-                return true;
-        } else {
+    for (size_t i = 0; i < prefix.length; i++) {
+        if (str.data[i] != prefix.data[i])
             return false;
-        }
     }
 
-    return false;
+    return true;
 }
 
 bool Str_endsWith(const Str str, const Str suffix) {
@@ -114,15 +135,11 @@ bool Str_endsWith(const Str str, const Str suffix) {
         return false;
 
     for (size_t i = 0; i < str.length; i++) {
-        if (str.data[str.length - i-1] == suffix.data[suffix.length - i-1]) {
-            if (i+1 == suffix.length)
-                return true;
-        } else {
+        if (str.data[str.length - i - 1] != suffix.data[suffix.length - i - 1])
             return false;
-        }
     }
 
-    return false;
+    return true;
 }
 
 bool Str_isNumeric(const Str str) {

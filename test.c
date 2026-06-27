@@ -24,5 +24,10 @@ int main(void) {
     printf("starts with Hello: %u\n", Str_startsWith(msg, Str_new("Hello")));
     printf("ends with world!: %u\n", Str_endsWith(msg, Str_new("world!")));
 
+    Str_toLower(msg);
+    Str_println(msg);
+    // Str_toUpper(msg);
+    // Str_println(msg);
+
     return 0;
 }
