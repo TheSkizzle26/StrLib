@@ -4,4 +4,4 @@ project(StrLib C)
 set(CMAKE_C_STANDARD 99)
 
 add_compile_options(-O3 -Wall)
-add_executable(StrLib test.c)
+add_executable(StrLib parser_test.c)
