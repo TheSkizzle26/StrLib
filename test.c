@@ -29,5 +29,15 @@ int main(void) {
     const Str value = Str_drop(data, Str_index(data, Str_new("=")) + 1);
     Str_println(value);
 
+    const Str toSplit = Str_new("Hello, these are, random,words,,Hello,");
+    size_t splitCount = 0;
+    const Str* splits = Str_split(toSplit, Str_new(","), &splitCount);
+
+    printf("splits:\n");
+    for (size_t i = 0; i < splitCount; i++) {
+        printf("%zu: ", i);
+        Str_println(splits[i]);
+    }
+
     return 0;
 }

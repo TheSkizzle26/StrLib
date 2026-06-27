@@ -1,8 +1,3 @@
-/*
- * Things to add:
- *  - Str_split(...)
- */
-
 #ifndef STR_H
 #define STR_H
 
@@ -21,6 +16,7 @@ Str Str_slice(Str str, size_t start, size_t end);
 Str Str_removePrefix(Str str, Str prefix);
 Str Str_removeSuffix(Str str, Str prefix);
 Str Str_trim(Str str);
+Str* Str_split(Str str, Str delimiter, size_t* outCount);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
 bool Str_equal(Str a, Str b);
@@ -40,6 +36,7 @@ void Str_println(Str str);
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 Str Str_new(char* cStr) {
@@ -94,6 +91,33 @@ Str Str_trim(Str str) {
         str = Str_take(str, str.length-1);
 
     return str;
+}
+
+Str* Str_split(Str str, const Str delimiter, size_t* outCount) {
+    Str* out = malloc(sizeof(Str));
+    size_t count = 0;
+    size_t capacity = 1;
+
+    size_t i = 0;
+    while (i < str.length) {
+        if (Str_startsWith((Str) { .data = str.data + i, .length = str.length - i }, delimiter)) {
+            if (count == capacity)
+                out = realloc(out, sizeof(Str) * (capacity <<= 2));
+
+            out[count++] = Str_take(str, i);
+            str = Str_drop(str, i + delimiter.length);
+            i = 0;
+        } else {
+            i++;
+        }
+    }
+
+    if (count == capacity)
+        out = realloc(out, sizeof(Str) * (capacity <<= 2));
+
+    out[count++] = Str_take(str, i);
+    *outCount = count;
+    return out;
 }
 
 size_t Str_count(const Str str, const Str sep) {
