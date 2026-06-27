@@ -1,10 +1,6 @@
 /*
  * Things to add:
  *  - Str_split(...)
- *  - Str_join(...)
- *  - Str_lower(...)
- *  - Str_upper(...)
- *  - Str_replace(...)
  */
 
 #ifndef STR_H
