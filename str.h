@@ -4,8 +4,6 @@
  *  - Str_join(...)
  *  - Str_lower(...)
  *  - Str_upper(...)
- *  - Str_removePrefix(...)
- *  - Str_removeSuffix(...)
  *  - Str_replace(...)
  */
 
