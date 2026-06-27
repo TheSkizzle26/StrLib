@@ -1,21 +1,18 @@
 #define RE_IMPLEMENTATION
 #include "re.h"
-#include <stdio.h>
+#define STR_IMPLEMENTATION
+#include "str.h"
 
 
 int main() {
-    RETokenVec vec = RETokenVec_new();
-    RETokenVec_push(&vec, (REToken) { .type = RE_GROUP, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_OR, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_GROUP, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_GROUP, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_OR, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_OR, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_OR, .data = 0 });
-    RETokenVec_push(&vec, (REToken) { .type = RE_GROUP, .data = 0 });
+    const Str str = Str_new("word (some more) another");
+    const Str regex = Str_new("/(\\(.*?\\))/");
 
-    for (size_t i = 0; i < vec.length; i++)
-        printf("%u\n", vec.tokens[i].type);
+    size_t matchCount = 0;
+    const Str* matches = RE_match(str, regex, &matchCount);
+
+    for (size_t i = 0; i < matchCount; i++)
+        Str_println(matches[i]);
 
     return 0;
 }
