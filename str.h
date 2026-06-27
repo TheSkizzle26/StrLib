@@ -22,6 +22,8 @@ typedef struct {
 
 Str Str_new(char* cStr);
 Str Str_slice(Str str, size_t start, size_t end);
+Str Str_removePrefix(Str str, Str prefix);
+Str Str_removeSuffix(Str str, Str prefix);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
 bool Str_equal(Str a, Str b);
@@ -61,6 +63,18 @@ Str Str_slice(const Str str, const size_t start, size_t end) {
         .data = str.data + start,
         .length = start < end ? end - start : 0
     };
+}
+
+Str Str_removePrefix(Str str, const Str prefix) {
+    if (Str_startsWith(str, prefix))
+        str.data += prefix.length;
+    return str;
+}
+
+Str Str_removeSuffix(Str str, const Str prefix) {
+    if (Str_endsWith(str, prefix))
+        str.length -= prefix.length;
+    return str;
 }
 
 size_t Str_count(const Str str, const Str sep) {
