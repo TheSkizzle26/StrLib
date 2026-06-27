@@ -7,7 +7,8 @@ int main(void) {
     const Str msg = Str_new("Hello, world!");
     printf("length: %zu\n", msg.length);
     Str_println(msg);
-    Str_println(Str_slice(msg, 7, msg.length));
+    Str_println(Str_take(msg, 7));
+    Str_println(Str_drop(msg, 7));
 
     const size_t count = Str_count(msg, Str_new("l"));
     printf("l count: %zu\n", count);
@@ -25,7 +26,7 @@ int main(void) {
     printf("ends with world!: %u\n", Str_endsWith(msg, Str_new("world!")));
 
     const Str data = Str_new("IMPORTANT_VALUE=IuseArchbtw");
-    const Str value = Str_slice(data, Str_index(data, Str_new("=")) + 1, data.length);
+    const Str value = Str_drop(data, Str_index(data, Str_new("=")) + 1);
     Str_println(value);
 
     return 0;

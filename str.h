@@ -19,9 +19,12 @@ typedef struct {
 } Str;
 
 Str Str_new(char* cStr);
+Str Str_take(Str str, size_t end);
+Str Str_drop(Str str, size_t start);
 Str Str_slice(Str str, size_t start, size_t end);
 Str Str_removePrefix(Str str, Str prefix);
 Str Str_removeSuffix(Str str, Str prefix);
+Str Str_trim(Str str);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
 bool Str_equal(Str a, Str b);
@@ -53,10 +56,23 @@ Str Str_new(char* cStr) {
     };
 }
 
+Str Str_take(const Str str, const size_t end) {
+    return (Str) {
+        .data = str.data,
+        .length = end < str.length ? end : str.length
+    };
+}
+
+Str Str_drop(const Str str, const size_t start) {
+    return (Str) {
+        .data = str.data + start,
+        .length = start < str.length ? str.length - start : 0
+    };
+}
+
 Str Str_slice(const Str str, const size_t start, size_t end) {
     if (end > str.length) end = str.length;
 
-    // TODO: check if this is safe for later modifications
     return (Str) {
         .data = str.data + start,
         .length = start < end ? end - start : 0
@@ -72,6 +88,15 @@ Str Str_removePrefix(Str str, const Str prefix) {
 Str Str_removeSuffix(Str str, const Str prefix) {
     if (Str_endsWith(str, prefix))
         str.length -= prefix.length;
+    return str;
+}
+
+Str Str_trim(Str str) {
+    while (str.length && (str.data[0] == ' ' || str.data[0] == '\n' || str.data[0] == '\t'))
+        str = Str_drop(str, 1);
+    while (str.length && (str.data[str.length-1] == ' ' || str.data[str.length-1] == '\n' || str.data[str.length-1] == '\t'))
+        str = Str_take(str, str.length-1);
+
     return str;
 }
 
