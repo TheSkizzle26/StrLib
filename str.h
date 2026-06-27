@@ -10,7 +10,7 @@ typedef struct {
 } Str;
 
 Str Str_new(char* cStr);
-Str Str_char(Str str, size_t idx);
+char Str_char(Str str, size_t idx);
 Str Str_take(Str str, size_t end);
 Str Str_drop(Str str, size_t start);
 Str Str_slice(Str str, size_t start, size_t end);
@@ -52,7 +52,7 @@ Str Str_new(char* cStr) {
     };
 }
 
-Str Str_char(Str str, size_t idx) {
+char Str_char(Str str, size_t idx) {
     if (idx >= str.length)
         return 0;
     return str.data[idx];
