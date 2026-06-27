@@ -29,6 +29,8 @@ int main() {
             printf("  ");
             Str_println(parts[j]);
         }
+
+        free(parts);
     }
 
     free(lines);
