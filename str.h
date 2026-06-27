@@ -17,6 +17,7 @@ Str Str_removePrefix(Str str, Str prefix);
 Str Str_removeSuffix(Str str, Str prefix);
 Str Str_trim(Str str);
 Str* Str_split(Str str, Str delimiter, size_t* outCount);
+Str* Str_splitLines(Str str, size_t* outCount);
 size_t Str_count(Str str, Str sep);
 size_t Str_index(Str str, Str substring);
 bool Str_equal(Str a, Str b);
@@ -119,6 +120,10 @@ Str* Str_split(Str str, const Str delimiter, size_t* outCount) {
     out[count++] = Str_take(str, i);
     *outCount = count;
     return out;
+}
+
+Str* Str_splitLines(const Str str, size_t* outCount) {
+    return Str_split(str, Str_new("\n"), outCount);
 }
 
 size_t Str_count(const Str str, const Str sep) {
