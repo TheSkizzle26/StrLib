@@ -27,6 +27,7 @@ bool Str_isAlpha(Str str);
 bool Str_isAlNum(Str str);
 bool Str_isLower(Str str);
 bool Str_isUpper(Str str);
+bool Str_isEmpty(Str str);
 void Str_print(Str str);
 void Str_println(Str str);
 
@@ -243,6 +244,16 @@ bool Str_isUpper(const Str str) {
     for (size_t i = 0; i < str.length; i++) {
         const char cur = str.data[i];
         if ('a' <= cur && cur <= 'z')
+            return false;
+    }
+
+    return true;
+}
+
+bool Str_isEmpty(const Str str) {
+    for (size_t i = 0; i < str.length; i++) {
+        const char cur = str.data[i];
+        if (cur != ' ' && cur != '\n' && cur != '\t')
             return false;
     }
 
