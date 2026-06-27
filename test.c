@@ -24,5 +24,9 @@ int main(void) {
     printf("starts with Hello: %u\n", Str_startsWith(msg, Str_new("Hello")));
     printf("ends with world!: %u\n", Str_endsWith(msg, Str_new("world!")));
 
+    const Str data = Str_new("IMPORTANT_VALUE=IuseArchbtw");
+    const Str value = Str_slice(data, Str_index(data, Str_new("=")) + 1, data.length);
+    Str_println(value);
+
     return 0;
 }
