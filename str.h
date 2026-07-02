@@ -36,6 +36,7 @@ void Str_println(Str str);
 #endif
 
 #ifdef STR_IMPLEMENTATION
+#undef STR_IMPLEMENTATION
 
 #include <stdbool.h>
 #include <stddef.h>
