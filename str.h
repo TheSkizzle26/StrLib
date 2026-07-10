@@ -5,11 +5,11 @@
 #include <stddef.h>
 
 typedef struct {
-    char* data;
+    const char* data;
     size_t length;
 } Str;
 
-Str Str_new(char* cStr);
+Str Str_new(const char* cStr);
 char Str_char(Str str, size_t idx);
 Str Str_take(Str str, size_t end);
 Str Str_drop(Str str, size_t start);
@@ -43,8 +43,8 @@ void Str_println(Str str);
 #include <stdlib.h>
 #include <stdio.h>
 
-Str Str_new(char* cStr) {
-    char* start = cStr;
+Str Str_new(const char* cStr) {
+    const char* start = cStr;
     while (*cStr) cStr++;
 
     return (Str) {
