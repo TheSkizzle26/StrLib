@@ -10,7 +10,7 @@ A simple, single-header library for working with string slices in C.
 - counting of substrings
 - index of substring
 - checking for equality
-- check if it's alphanumeric, lowercase, erc.
+- check if it's alphanumeric, lowercase, etc.
 - printing
 
 # Simple Example
